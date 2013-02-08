@@ -13,3 +13,10 @@ require.config({
   }
 });
  
+/** -- Sample Implementation -- **/
+
+// require(['models/slide'], function(SlideModel){
+// 	console.log( new SlideModel({ title: "My First Modular App" }) );
+// });
+
+
