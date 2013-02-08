@@ -1,3 +1,5 @@
+//require = use it now
+//define  = use it now and register it as a dependency for later use.
 require.config({
   shim: {
   	"backbone": {
@@ -19,4 +21,9 @@ require.config({
 // 	console.log( new SlideModel({ title: "My First Modular App" }) );
 // });
 
-
+require(['models/slide', 'views/slide'], function(SlideModel, SlideView){
+  var slide     = new SlideModel({ title: 'My First Slide' });
+  var slideView = new SlideView({ model: slide });
+  slideView.render();
+  console.log(slideView.el);
+});
