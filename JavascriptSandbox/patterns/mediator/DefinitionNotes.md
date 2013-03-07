@@ -81,10 +81,10 @@ var listComponents = function(this.components)
 }
 ```
 
-So once you have added objects to the Mediator ( Controll Tower ), then you can broadcast events for them to listen too. This would be the air trafic controller telling planes to take off, the runway got swallowed by an earthquake, ect..
-
-
-
+So once you have added objects to the Mediator ( Controll Tower ), then you can broadcast events for them to listen too. This would be the air trafic controller telling planes to take off, the runway got swallowed by an earthquake, ect..  
+  
+  
+  
 ###Broadcast
 Broadcasting lets participating objects know that an event is taking place. 
 Those would be objects that are in the Mediator. 
