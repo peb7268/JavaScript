@@ -83,6 +83,8 @@ var listComponents = function(this.components)
 
 So once you have added objects to the Mediator ( Controll Tower ), then you can broadcast events for them to listen too. This would be the air trafic controller telling planes to take off, the runway got swallowed by an earthquake, ect..
 
+
+
 ###Broadcast
 Broadcasting lets participating objects know that an event is taking place. 
 Those would be objects that are in the Mediator. 
@@ -111,7 +113,8 @@ var broadcast = function(event, args, source) {
 };
 ```
 
-###The facedé - The public API 
+
+###The Facadé - The public API 
 The particular implementation for this module is the module revealing pattern. It has private inner workings and only 
 returns the part of it that it wants people to see. The interface that the Mediator returns is a facade for the acutal private method names. 
 
@@ -129,7 +132,8 @@ return {
 That pretty much sums up the Mediator pattern.
  
 
-####The full code 
+
+####The Full Code
 
 ````markdown
 Mediator = (function() {
