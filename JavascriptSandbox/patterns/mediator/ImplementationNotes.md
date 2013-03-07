@@ -41,6 +41,9 @@ Mediator.add('Account', function() {
 ```
 
 ####2. Broadcasting events to our new object! 
+Broadcasting is essentially triggering an event and letting the control tower know it took place. 
+This is where you would pass data to the handler. 
+
 ```js
 Mediator.broadcast('AccountInitialize');                 
 Mediator.broadcast('MakeDeposit', [300]);

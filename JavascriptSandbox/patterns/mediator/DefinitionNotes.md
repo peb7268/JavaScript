@@ -10,8 +10,8 @@ The Mediator is what is returned as a result of the method evaluation. The metho
 and returns a facadé to the actual internal implementation of the Mediator object. The facadé doesnt really do much
 except make some aliass in this case.
 
-###Components 
-Components are the participants in the event hub. You can think of them as the airplanes the tower is controlling.
+###members 
+members are the participants in the event hub. You can think of them as the airplanes the tower is controlling.
 To illustrate componets better, take a hypothetical banking application for instance. When building a banking app you will have all kinds of related objects. That list may look a little something like this: 
 
 * Customer
@@ -24,31 +24,31 @@ ect... You get the idea.
 
 Once we have a this list of players we then add them to the Mediator and tell our traffic control tower to look out for messages from each of these players until they stop being in a relationship with us.
 
-Components are represented internally as just an object that is composed of other objects. 
+members are represented internally as just an object that is composed of other objects. 
 
-```js components = {}; ```
+```js members = {}; ```
 
-Below are the main ways we work with components: 
+Below are the main ways we work with members: 
 
 ###addComponent 
-Next up is ```addComponent``` it's how you add components to be tracked to the Mediator. 
-This adds it to the Mediator's internal components object. Consult the implementaion readme to 
+Next up is ```addComponent``` it's how you add members to be tracked to the Mediator. 
+This adds it to the Mediator's internal members object. Consult the implementaion readme to 
 see how to add objects to the Mediator.
-*  name: what the component is called internally
-*  component: the arguments the event took
+*  name: what the participant is called internally
+*  participant: the arguments the event took
 *  replaceDuplicate: to overwrite an existing value or not
 *  exposed as: add
 
 ```js
-var addComponent = function(name, component, replaceDuplicate) {
-    if(name in components) {
+var addComponent = function(name, participant, replaceDuplicate) {
+    if(name in members) {
         if(replaceDuplicate) {
             removeComponent(name);
         } else {
             throw new Error('Mediator name conflict: ' + name);
         }
     }
-    components[name] = component;
+    members[name] = participant;
 };
 ```
 
@@ -58,26 +58,26 @@ The following is very simple. No further explanation needed.
 ```js
 var removeComponent = function(name)
 {
-    if (name in components) {
-        delete components[name];
+    if (name in members) {
+        delete members[name];
     }
 };
 ```
 Since the Mediator returns a facadé and keeps things the internal implementation private it makes sense that we would have some 
-convinence methods that would grant access to internal parts of the Mediator. That way we can inspect what kind of components we have and so forth. 
+convinence methods that would grant access to internal parts of the Mediator. That way we can inspect what kind of members we have and so forth. 
 
 ```js   
 var getComponent = function(name) {
-    return components[name]; // undefined if component has not been added
+    return members[name]; // undefined if participant has not been added
 };
 
 var contains = function(name) {
-    return (name in components);
+    return (name in members);
 };
 
-var listComponents = function(this.components)
+var listComponents = function(this.members)
 {
-    //list components code.
+    //list members code.
 }
 ```
 
@@ -99,11 +99,11 @@ var broadcast = function(event, args, source) {
         return;
     }
     args = args || [];
-    for (var c in components) {
-        if (typeof components[c]["on" + event] == "function") {
+    for (var c in members) {
+        if (typeof members[c]["on" + event] == "function") {
             try {
-                source = source || components[c];
-                components[c]["on" + event].apply(source, args);
+                source = source || members[c];
+                members[c]["on" + event].apply(source, args);
             } catch (err) {
                 debug(["Mediator error.", event, args, source, err].join(' '));
             }
@@ -137,7 +137,7 @@ That pretty much sums up the Mediator pattern.
 ````markdown
 Mediator = (function() {
         var debug = function() { /* console.log or air.trace as desired */ },
-            components = {};
+            members = {};
 
        /* -- Broadcast that an event is taking place ----------------------------------------------------------------------
         *  event: the event thats taking place. ( click, hover, custom event, ect...)
@@ -150,12 +150,12 @@ Mediator = (function() {
                 return;
             }
             args = args || [];
-            for (var c in components) {
-                if (typeof components[c]["on" + event] == "function") {
+            for (var c in members) {
+                if (typeof members[c]["on" + event] == "function") {
                     try {
                         //debug("Mediator calling " + event + " on " + c);
-                        source = source || components[c];
-                        components[c]["on" + event].apply(source, args);
+                        source = source || members[c];
+                        members[c]["on" + event].apply(source, args);
                     } catch (err) {
                         debug(["Mediator error.", event, args, source, err].join(' '));
                     }
@@ -163,35 +163,35 @@ Mediator = (function() {
             }
         };
         
-        /* -- Add an component to the internal components object ---------------------------------------------------------
-        *  name:                what the component is called internally
-        *  component:           the arguments the event took
+        /* -- Add an participant to the internal members object ---------------------------------------------------------
+        *  name:                what the participant is called internally
+        *  participant:           the arguments the event took
         *  replaceDuplicate:    to overwrite an existing value or not
         *  exposed as:          add
         *----------------------------------------------------------------------------------------------------------------*/    
-        var addComponent = function(name, component, replaceDuplicate) {
-            if(name in components) {
+        var addComponent = function(name, participant, replaceDuplicate) {
+            if(name in members) {
                 if(replaceDuplicate) {
                     removeComponent(name);
                 } else {
                     throw new Error('Mediator name conflict: ' + name);
                 }
             }
-            components[name] = component;
+            members[name] = participant;
         };
         
         var removeComponent = function(name) {
-            if (name in components) {
-                delete components[name];
+            if (name in members) {
+                delete members[name];
             }
         };
         
         var getComponent = function(name) {
-            return components[name]; // undefined if component has not been added
+            return members[name]; // undefined if participant has not been added
         };
         
         var contains = function(name) {
-            return (name in components);
+            return (name in members);
         };
         
         //module revealing pattern: This is the interface that returns. Its a facade for the acutal private method names.

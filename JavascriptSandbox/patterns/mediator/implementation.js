@@ -1,10 +1,10 @@
- Mediator.add('TestObject', function() {
+ Mediator.add('SomeObject', function() {
         
-        var someNumber = 0; // sample variable
+        var someNumber = 0; 
         var someString = 'another sample variable';
         
         return {
-            name        : "TestObject",
+            name        : "SomeObject",
             onInitialize: function() {
                 console.log(this.name + " initialized.");
             },
@@ -21,7 +21,7 @@
 
  Mediator.add('Account', function() {
         
-        var startingBalance = 250; // sample variable
+        var startingBalance = 250; 
         var accountHolder   = 'Paul Barrick';
         var balance;
         
@@ -49,15 +49,6 @@
         }
 }());
 
-
-
-// Mediator.broadcast("Initialize");                
-// Mediator.broadcast('FakeEvent');                 
-// Mediator.broadcast('SetString', ['test string']);
-
-// Mediator.broadcast('FakeEvent');                 
-// Mediator.broadcast('SessionStart');              
-// Mediator.broadcast('Translate', ['this is also safely ignored']);
 
 Mediator.broadcast('AccountInitialize');                 
 Mediator.broadcast('MakeDeposit', [300]);

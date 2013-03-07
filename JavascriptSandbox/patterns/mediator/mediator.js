@@ -1,22 +1,22 @@
 Mediator = (function()
 {
         var debug = function() { /* console.log or air.trace as desired */ },
-            components = {};
+            members = {};
 
         var broadcast = function(event, args, source)
         {   
-            var c;
+            var participant;
 
             if (!event) {
                 return;
             }
-            
+
             args = args || [];
-            for (c in components) {
-                if (typeof components[c]["on" + event] == "function") {
+            for (participant in members) {
+                if (typeof members[participant]["on" + event] == "function") {
                     try {
-                        source = source || components[c];
-                        components[c]["on" + event].apply(source, args);
+                        source = source || members[participant];
+                        members[participant]["on" + event].apply(source, args);
                     } catch (err) {
                         debug(["Mediator error.", event, args, source, err].join(' '));
                     }
@@ -25,29 +25,29 @@ Mediator = (function()
         };        
         var addComponent = function(name, component, replaceDuplicate)
         {
-            if(name in components) {
+            if(name in members) {
                 if(replaceDuplicate) {
                     removeComponent(name);
                 } else {
                     throw new Error('Mediator name conflict: ' + name);
                 }
             }
-            components[name] = component;
+            members[name] = component;
         };
         var removeComponent = function(name)
         {
-            if (name in components) {
-                delete components[name];
+            if (name in members) {
+                delete members[name];
             }
         };
         var getComponent = function(name)
         {
-            return components[name]; 
+            return members[name]; 
         };
         
         var contains = function(name)
         {
-            return (name in components);
+            return (name in members);
         };
         
         return {
