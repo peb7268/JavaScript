@@ -11,7 +11,7 @@
 	
 	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 	<script type="text/javascript" src="mediator.js" charset="utf-8"></script>
-	<script type="text/javascript" src="global.js" charset="utf-8"></script>
+	<script type="text/javascript" src="implementation.js" charset="utf-8"></script>
 </head>
 <body></body>
 

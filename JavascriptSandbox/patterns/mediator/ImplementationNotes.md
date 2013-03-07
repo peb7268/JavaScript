@@ -2,9 +2,8 @@
 This pattern is also known as the sandbox pattern and is very closely related to the Event Hub pattern. 
 url: http://arguments.callee.info/2009/05/18/javascript-design-patterns--mediator/
 
-
 ###Implementation 
-1. Add a Top Level object ( TestObject ) to the components object in the metiator
+1. Add the item to the metiator
 2. broadcast the events 
 
           
