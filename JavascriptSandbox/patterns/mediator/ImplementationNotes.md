@@ -5,7 +5,7 @@ url: http://arguments.callee.info/2009/05/18/javascript-design-patterns--mediato
 ##Implementation 
 To implement the Mediator pattern you must do 2 things. 
 
-1. Add the item to be tracked to the metiator 
+1. Add the item to be tracked to the mediator 
 2. & broadcast the events to be listened for.
 
 ####1. Adding an item to be tracked to the Mediator. 
